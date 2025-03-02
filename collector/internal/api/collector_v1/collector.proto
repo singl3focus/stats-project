@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package collector_v1; // major: added implmentation of REST 'coordinator' service without grpcclient, also  GRPC 'collector' service architecture has been built
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+
+option go_package = "github.com/singl3focus/stats-project/collector/pkg/collector_v1;collector_v1";
+
+service ChatServerV1 {
+    // Добавление нового вызова
+    rpc AddCall(AddCallRequest) returns (AddCallResponse) {
+        option (google.api.http) = {
+            post: "/v1/call"
+            body: "*"
+        };
+    }
+
+    // Получение статистики вызовов
+    rpc GetCalls(GetCallsRequest) returns (GetCallsResponse) {
+        option (google.api.http) = {
+            get: "/v1/calls"
+        };
+    }
+
+    // Добавление нового сервиса
+    rpc AddService(AddServiceRequest) returns (AddServiceResponse) {
+        option (google.api.http) = {
+            post: "/v1/service"
+            body: "*"
+        };
+    }
+}
+
+message AddCallRequest {
+    int32 user_id = 1;
+    int32 service_id = 2;
+}
+  
+message AddCallResponse {
+    bool success = 1;
+    string error = 2;
+}
+  
+message GetCallsRequest {
+    google.protobuf.Int32Value user_id = 1;     // Опциональный фильтр по пользователю
+    google.protobuf.Int32Value service_id = 2;  // Опциональный фильтр по сервису
+    int32 page = 3;                             // Номер страницы (по умолчанию 1)
+    int32 per_page = 4;                         // Количество записей на странице (по умолчанию 10)
+    string sort = 6;                            // Направление сортировки (ASC/DESC)
+}
+
+message CallStat {
+    int32 user_id = 1;
+    int32 service_id = 2;
+    int32 count = 3;
+}
+
+message GetCallsResponse {
+    repeated CallStat stats = 1;
+    int32 total = 2;          
+    int32 current_page = 3;
+    int32 per_page = 4;
+    string error = 5;
+}
+
+
+message AddServiceRequest {
+    string name = 1;
+    string description = 2;
+}
+
+message AddServiceResponse {
+    int32 service_id = 1;    
+    bool success = 2;
+    string error = 3;
+}
