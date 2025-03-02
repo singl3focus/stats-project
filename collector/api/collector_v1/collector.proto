@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package collector_v1; // major: added implmentation of REST 'coordinator' service without grpcclient, also  GRPC 'collector' service architecture has been built
+package collector_v1;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
@@ -47,9 +47,9 @@ message AddCallResponse {
 message GetCallsRequest {
     google.protobuf.Int32Value user_id = 1;     // Опциональный фильтр по пользователю
     google.protobuf.Int32Value service_id = 2;  // Опциональный фильтр по сервису
-    int32 page = 3;                             // Номер страницы (по умолчанию 1)
-    int32 per_page = 4;                         // Количество записей на странице (по умолчанию 10)
-    string sort = 6;                            // Направление сортировки (ASC/DESC)
+    int32 page = 3;                             // Опциональный фильтр Номер страницы (по умолчанию 1)
+    int32 per_page = 4;                         // Опциональный фильтр Количество записей на странице (по умолчанию 10)
+    string sort = 6;                            // Направление сортировки (ASC/DESC) (по умолчанию ASC)
 }
 
 message CallStat {
