@@ -2,6 +2,7 @@ package logger
 
 import (
 	"log/slog"
+	"os"
 	"strings"
 )
 
@@ -38,7 +39,7 @@ func NewLogger(level string, enable bool) Logger {
 		panic("undefined logger level " + level)
 	}
 
-	h := slog.NewJSONHandler(nil, &slog.HandlerOptions{Level: slogLvl})
+	h := slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slogLvl})
 	logger := slog.New(h)
 
 	return logger

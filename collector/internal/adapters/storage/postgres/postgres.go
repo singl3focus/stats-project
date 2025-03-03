@@ -5,10 +5,10 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"gitlab.e-m-l.ru/devkit/logger"
 
 	"github.com/singl3focus/stats-project/collector/internal/config"
 	"github.com/singl3focus/stats-project/collector/internal/domain"
+	"github.com/singl3focus/stats-project/collector/pkg/logger"
 )
 
 type Database struct {
@@ -27,9 +27,9 @@ func NewDB(cfg *config.Config, l logger.Logger) domain.IStorageAdapter {
 	}
 
 	// See "Important settings" section.
-	db.SetConnMaxLifetime(time.Minute * 3)
-	db.SetMaxOpenConns(10)
-	db.SetMaxIdleConns(10)
+	db.SetConnMaxLifetime(time.Minute * 3) 
+	// db.SetMaxOpenConns(10) // deps on bussines-logic
+	// db.SetMaxIdleConns(10) // deps on bussines-logic
 
 	return &Database{
 		db:     db,

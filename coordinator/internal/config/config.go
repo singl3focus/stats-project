@@ -19,6 +19,10 @@ type Config struct {
 
 type AppConfig struct {
 	Version string `yaml:"version" env-requried:"true"`
+
+	API struct {
+		GRPCCollectorServiceAddr string `yaml:"collector" env-requried:"true"`
+	} `yaml:"api" env-requried:"true"`
 }
 
 type HTTPConfig struct {

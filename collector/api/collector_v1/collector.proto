@@ -2,36 +2,19 @@ syntax = "proto3";
 
 package collector_v1;
 
-import "google/protobuf/timestamp.proto";
-import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
-import "google/api/annotations.proto";
 
 option go_package = "github.com/singl3focus/stats-project/collector/pkg/collector_v1;collector_v1";
 
-service ChatServerV1 {
+service CollectorServiceV1 {
     // Добавление нового вызова
-    rpc AddCall(AddCallRequest) returns (AddCallResponse) {
-        option (google.api.http) = {
-            post: "/v1/call"
-            body: "*"
-        };
-    }
+    rpc AddCall(AddCallRequest) returns (AddCallResponse);
 
     // Получение статистики вызовов
-    rpc GetCalls(GetCallsRequest) returns (GetCallsResponse) {
-        option (google.api.http) = {
-            get: "/v1/calls"
-        };
-    }
+    rpc GetCalls(GetCallsRequest) returns (GetCallsResponse);
 
     // Добавление нового сервиса
-    rpc AddService(AddServiceRequest) returns (AddServiceResponse) {
-        option (google.api.http) = {
-            post: "/v1/service"
-            body: "*"
-        };
-    }
+    rpc AddService(AddServiceRequest) returns (AddServiceResponse);
 }
 
 message AddCallRequest {
@@ -47,8 +30,8 @@ message AddCallResponse {
 message GetCallsRequest {
     google.protobuf.Int32Value user_id = 1;     // Опциональный фильтр по пользователю
     google.protobuf.Int32Value service_id = 2;  // Опциональный фильтр по сервису
-    int32 page = 3;                             // Опциональный фильтр Номер страницы (по умолчанию 1)
-    int32 per_page = 4;                         // Опциональный фильтр Количество записей на странице (по умолчанию 10)
+    google.protobuf.Int32Value page = 3;        // Опциональный фильтр Номер страницы (по умолчанию 1)
+    google.protobuf.Int32Value per_page = 4;    // Опциональный фильтр Количество записей на странице (по умолчанию 10)
     string sort = 6;                            // Направление сортировки (ASC/DESC) (по умолчанию ASC)
 }
 

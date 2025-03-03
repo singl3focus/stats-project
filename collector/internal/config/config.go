@@ -13,7 +13,7 @@ const (
 
 type Config struct {
 	App        AppConfig    `yaml:"app"`
-	HTTPServer HTTPConfig   `yaml:"http"`
+	GRPCServer GRPCConfig   `yaml:"grpc"`
 	Logger     LoggerConfig `yaml:"logger"`
 	Database   DBConfig     `yaml:"database"`
 }
@@ -22,7 +22,7 @@ type AppConfig struct {
 	Version string `yaml:"version" env-requried:"true"`
 }
 
-type HTTPConfig struct {
+type GRPCConfig struct {
 	Port              int           `yaml:"port" env-requried:"true"`
 	ReadHeaderTimeout time.Duration `yaml:"read_header_timeout" env-requried:"true"`
 	ReadTimeout       time.Duration `yaml:"read_timeout" env-requried:"true"`

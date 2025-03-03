@@ -1,12 +1,14 @@
 app:
   version: 1.0.0 # [STRING]
 
-http_server:
+grpc:
   port: 9060 # [INTEGER]
-  read_header_timeout: 10s # [TIME.DURATION]
-  read_timeout: 20s # [TIME.DURATION]
-  write_timeout: 20s # [TIME.DURATION]
-  idle_timeout: 1m # [TIME.DURATION]
+
+database:
+  migration:
+    dir: "./migrations"
+  postgres:
+    url: "host=localhost port=5432 user=postgres password=postgres dbname=postgres sslmode=disable"
 
 logging:
   enable: true # [BOOLEAN]

@@ -1,8 +1,10 @@
 app:
   version: 1.0.0 # [STRING]
+  api:
+    collector: localhost:9060
 
 http_server:
-  port: 9060 # [INTEGER]
+  port: 9070 # [INTEGER]
   read_header_timeout: 10s # [TIME.DURATION]
   read_timeout: 20s # [TIME.DURATION]
   write_timeout: 20s # [TIME.DURATION]

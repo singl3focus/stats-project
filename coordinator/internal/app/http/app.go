@@ -13,7 +13,7 @@ func Run() {
 
 	logger := logger.NewLogger(cfg.Logger.Level, cfg.Logger.Enable)
 
-	statsService := grpcclient.NewGrpcService()
+	statsService := grpcclient.New(cfg.App.API.GRPCCollectorServiceAddr)
 	usecaseStats :=usecase.NewStatsService(logger, statsService)
 
 	handler := httpserver.NewHandler(logger, usecaseStats)
